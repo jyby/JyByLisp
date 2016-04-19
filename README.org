@@ -10,6 +10,7 @@
 #+CREATOR: Emacs 24.4.1 (Org mode 8.2.5h)
 
 
+
 * global-force-set-key
 
 A recurrent task in my configuration  file is to unset a key, and then to set it to a particular function.
@@ -47,4 +48,18 @@ Here is a first draft of a function which helps with some of the most basic tran
   (replace-regexp "\\\\end\{LONG\}" "")
   )
 #+END_SRC
+
+
+* TODO clever-archive
+  :LOGBOOK:
+  - Note taken on [2016-04-18 Mon 22:03] \\
+    http://stackoverflow.com/questions/31666110/duplicate-tree-structure-in-org-mode-archive
+  :END:
+
+A variant of =org-archive-to-archive-sibling= and =org-archive-subtree= which archive a subtree to an archive file, but recreates if necessary all its ancestor nodes in the archive file.
+
+** REFERENCE
+   - [[file:~/Unison/Configuration/EmacsFiles/Librairies/org-mode8/lisp/org-archive.el::(defun%20org-archive-subtree%20(&optional%20find-done)][file:~/Unison/Configuration/EmacsFiles/Librairies/org-mode8/lisp/org-archive.el::(defun org-archive-subtree (&optional find-done)]]
+   - [[file:~/Unison/Configuration/EmacsFiles/Librairies/org-mode8/lisp/org-archive.el::(defun%20org-archive-to-archive-sibling%20()][file:~/Unison/Configuration/EmacsFiles/Librairies/org-mode8/lisp/org-archive.el::(defun org-archive-to-archive-sibling ()]]
+** CODE
 
