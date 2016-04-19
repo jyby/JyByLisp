@@ -1,0 +1,50 @@
+#+TITLE: JyByLisp
+#+DATE: <2016-04-18 Mon>
+#+AUTHOR: Jérémy Barbay
+#+EMAIL: jeremy@barbay.cl
+#+DESCRIPTION: Elisp code that I found useful
+#+KEYWORDS: elisp
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 24.4.1 (Org mode 8.2.5h)
+
+
+* global-force-set-key
+
+A recurrent task in my configuration  file is to unset a key, and then to set it to a particular function.
+I programmed the following function to group both into one single operation:
+
+#+BEGIN_SRC elisp
+(defun jyby/global-force-set-key (key command)
+  "Unset globally the key KEY, then binds it globally to the function COMMAND.
+
+For instance, it can be used to write
+  (jyby/global-force-set-key [f2] 'org-clock-goto)	     
+instead of 
+  (global-unset-key [f2])    
+  (global-set-key [f2] 'org-clock-goto)
+" 
+  (global-unset-key key)
+  (global-set-key key command)	     
+  )
+#+END_SRC
+
+* tex-to-org
+
+Whereas =org-mode= makes it easy to to export from org to tex, I sometimes have to perform the reverse operation.
+Here is a first draft of a function which helps with some of the most basic transformations, usefull for some paragraphs.
+
+#+BEGIN_SRC elisp
+(defun jyby/tex-to-org ()
+  (interactive)
+  "Replace various latex commands by the corresponding orgmode equivalent."
+
+  (replace-regexp "\\\\emph\{\\([a-zA-Z ,.]*\\)\}" "/\\1/")
+  (replace-regexp "\\\\textbf\{\\([a-z,A-Z,0-9, \,]*\\)\}" "*\\1*")
+  (replace-regexp "\\\\texttt\{\\([a-z,A-Z]*\\)\}" "=\\1=")
+  (replace-regexp "\\\\begin\{LONG\}" "")
+  (replace-regexp "\\\\end\{LONG\}" "")
+  )
+#+END_SRC
+
